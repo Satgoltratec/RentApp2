@@ -84,6 +84,7 @@ function Container() {
           <Text style={styles.itemBotton}>Item 2</Text>
           <Text style={styles.itemBotton}>Item 3</Text>
           <Text style={styles.itemBotton}>Item 4</Text>
+          <Text style={styles.itemBotton}>Item 5</Text>
         </View>
       </View>
     </SafeAreaView>
@@ -107,6 +108,7 @@ const styles = StyleSheet.create({
   itemsBotton: {
     flexDirection: 'row', // Items horizontalmente
     alignItems: 'center',
+    height: 50,
   },
   item: {
     margin: 10,
