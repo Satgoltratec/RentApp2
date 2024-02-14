@@ -52,17 +52,34 @@ function Container() {
             <Button title="FILTRO" />
           </View>
         </View>
-        <View style={{height: 50}}>
-          <ScrollView horizontal={true} style={styles.scrollViewCategory}>
+        <View
+          style={{backgroundColor: 'tomato', height: 50, flexDirection: 'row'}}>
+          <ScrollView horizontal={true}>
             <View style={styles.items}>
-              <Text style={styles.item}>ScrollItem 1</Text>
-              <Text style={styles.item}>ScrollItem 2</Text>
-              <Text style={styles.item}>ScrollItem 3</Text>
-              <Text style={styles.item}>ScrollItem 4</Text>
-              <Text style={styles.item}>ScrollItem 5</Text>
-              <Text style={styles.item}>ScrollItem 6</Text>
-              <Text style={styles.item}>ScrollItem 7</Text>
-              <Text style={styles.item}>ScrollItem 8</Text>
+              <View style={styles.item}>
+                <Text>ScrollItem 1</Text>
+              </View>
+              <View style={styles.item}>
+                <Text>ScrollItem 2</Text>
+              </View>
+              <View style={styles.item}>
+                <Text>ScrollItem 3</Text>
+              </View>
+              <View style={styles.item}>
+                <Text>ScrollItem 4</Text>
+              </View>
+              <View style={styles.item}>
+                <Text>ScrollItem 5</Text>
+              </View>
+              <View style={styles.item}>
+                <Text>ScrollItem 6</Text>
+              </View>
+              <View style={styles.item}>
+                <Text>ScrollItem 7</Text>
+              </View>
+              <View style={styles.item}>
+                <Text>ScrollItem 8</Text>
+              </View>
             </View>
           </ScrollView>
         </View>
@@ -129,7 +146,6 @@ const styles = StyleSheet.create({
   },
   items: {
     flexDirection: 'row', // Items horizontalmente
-    alignItems: 'center',
     height: 50,
   },
   itemsBotton: {
@@ -137,7 +153,10 @@ const styles = StyleSheet.create({
     height: 50,
   },
   item: {
-    margin: 10,
+    borderWidth: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexGrow: 1,
   },
   itemBotton: {
     borderWidth: 1,
@@ -146,10 +165,6 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
 
-  scrollViewCategory: {
-    backgroundColor: 'tomato',
-    height: 23,
-  },
   scrollViewContent: {
     backgroundColor: 'lightblue',
   },
