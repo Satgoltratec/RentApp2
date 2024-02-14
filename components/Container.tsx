@@ -21,70 +21,97 @@ function Container() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.search}>
-        {/* Barra de búsqueda */}
-        <TextInput
+      <View
+        style={{
+          flex: 1,
+        }}>
+        <View
           style={{
-            height: 35,
-            width: 300,
-            margin: 12,
-            borderWidth: 1,
-            padding: 5,
-            borderRadius: 10,
-          }}
-          placeholder="Busqueda"
-        />
-        <Button title="FILTRO" />
-      </View>
-      <View style={{height: 50}}>
-        <ScrollView horizontal={true} style={styles.scrollViewCategory}>
-          <View style={styles.items}>
-            <Text style={styles.item}>ScrollItem 1</Text>
-            <Text style={styles.item}>ScrollItem 2</Text>
-            <Text style={styles.item}>ScrollItem 3</Text>
-            <Text style={styles.item}>ScrollItem 4</Text>
-            <Text style={styles.item}>ScrollItem 5</Text>
-            <Text style={styles.item}>ScrollItem 6</Text>
-            <Text style={styles.item}>ScrollItem 7</Text>
-            <Text style={styles.item}>ScrollItem 8</Text>
-          </View>
-        </ScrollView>
-      </View>
-
-      <ScrollView style={styles.scrollViewContent}>
-        {data.map(house => (
-          <View key={house.id} style={{padding: 10}}>
-            <Image
-              source={{uri: house.imageUrl}}
+            paddingHorizontal: 12,
+            flexDirection: 'row',
+            backgroundColor: 'lightgrey',
+            height: 50,
+            alignItems: 'center',
+          }}>
+          {/* Barra de búsqueda */}
+          <View style={{flexGrow: 1}}>
+            <TextInput
               style={{
-                width: 370,
-                height: 250,
-                borderRadius: 20,
-              }}
-            />
-            <View style={{padding: 7}}>
-              <Text style={{fontWeight: 'bold'}}>
-                {house.province}, {house.country}
-              </Text>
-              <Text>{house.owner}</Text>
+                height: 35,
+                marginRight: 12,
+                borderWidth: 1,
 
-              <Text>{house.pricePerNight} € por noche</Text>
-            </View>
+                padding: 5,
+                borderRadius: 10,
+              }}
+              placeholder="Busqueda"
+            />
           </View>
-        ))}
-      </ScrollView>
-      <View style={styles.bottomMenu}>
-        {/* Barra Inferior */}
+
+          <View style={{backgroundColor: 'tomato', width: 80}}>
+            <Button title="FILTRO" />
+          </View>
+        </View>
+        <View style={{height: 50}}>
+          <ScrollView horizontal={true} style={styles.scrollViewCategory}>
+            <View style={styles.items}>
+              <Text style={styles.item}>ScrollItem 1</Text>
+              <Text style={styles.item}>ScrollItem 2</Text>
+              <Text style={styles.item}>ScrollItem 3</Text>
+              <Text style={styles.item}>ScrollItem 4</Text>
+              <Text style={styles.item}>ScrollItem 5</Text>
+              <Text style={styles.item}>ScrollItem 6</Text>
+              <Text style={styles.item}>ScrollItem 7</Text>
+              <Text style={styles.item}>ScrollItem 8</Text>
+            </View>
+          </ScrollView>
+        </View>
+
+        <ScrollView style={styles.scrollViewContent}>
+          {data.map(house => (
+            <View key={house.id} style={{padding: 10}}>
+              <Image
+                source={{uri: house.imageUrl}}
+                style={{
+                  height: 250,
+                  borderRadius: 20,
+                }}
+              />
+              <View style={{padding: 7}}>
+                <Text style={{fontWeight: 'bold'}}>
+                  {house.province}, {house.country}
+                </Text>
+                <Text>{house.owner}</Text>
+
+                <Text>{house.pricePerNight} € por noche</Text>
+              </View>
+            </View>
+          ))}
+        </ScrollView>
 
         <Pressable style={styles.buttonMap} onPress={onPressFunction}>
           <Text style={styles.textButton}>BOTON</Text>
         </Pressable>
-        <View style={styles.itemsBotton}>
-          <Text style={styles.itemBotton}>Item 1</Text>
-          <Text style={styles.itemBotton}>Item 2</Text>
-          <Text style={styles.itemBotton}>Item 3</Text>
-          <Text style={styles.itemBotton}>Item 4</Text>
-          <Text style={styles.itemBotton}>Item 5</Text>
+
+        <View style={styles.bottomMenu}>
+          {/* Barra Inferior */}
+
+          <View style={styles.itemBotton}>
+            <Text>Item 1</Text>
+            <Text>x</Text>
+          </View>
+          <View style={styles.itemBotton}>
+            <Text>Item 1</Text>
+          </View>
+          <View style={styles.itemBotton}>
+            <Text>Item 1</Text>
+          </View>
+          <View style={styles.itemBotton}>
+            <Text>Item 1</Text>
+          </View>
+          <View style={styles.itemBotton}>
+            <Text>Item 1</Text>
+          </View>
         </View>
       </View>
     </SafeAreaView>
@@ -107,14 +134,16 @@ const styles = StyleSheet.create({
   },
   itemsBotton: {
     flexDirection: 'row', // Items horizontalmente
-    alignItems: 'center',
     height: 50,
   },
   item: {
     margin: 10,
   },
   itemBotton: {
-    margin: 10,
+    borderWidth: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexGrow: 1,
   },
 
   scrollViewCategory: {
@@ -127,22 +156,26 @@ const styles = StyleSheet.create({
   bottomMenu: {
     backgroundColor: 'lightgreen',
     height: 50,
+    flexDirection: 'row',
   },
   buttonMap: {
     position: 'absolute',
-    bottom: 80,
-    left: 152,
+    bottom: 74,
     paddingHorizontal: 20,
     backgroundColor: 'black',
     borderRadius: 20,
     elevation: 3,
+    width: 120,
+    left: '50%',
+    marginLeft: -60,
+    alignItems: 'center',
   },
   textButton: {
     fontSize: 15,
     lineHeight: 21,
     paddingVertical: 12,
     fontWeight: 'bold',
-    letterSpacing: 0.25,
+
     color: 'white',
   },
 });

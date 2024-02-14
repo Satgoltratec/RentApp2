@@ -7,8 +7,10 @@
 
 import React from 'react';
 import Container from './components/Container';
+import Prueba from './components/Prueba';
 
 function App(): React.JSX.Element {
+  // return <Prueba />;
   return <Container />;
 }
 
