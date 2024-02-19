@@ -6,12 +6,30 @@
  */
 
 import React from 'react';
-import Container from './components/Container';
-import Prueba from './components/Prueba';
+import Home from './components/Home';
+import Details from './components/Details';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+// import Prueba from './components/Prueba';
+
+const Stack = createNativeStackNavigator();
 
 function App(): React.JSX.Element {
   // return <Prueba />;
-  return <Container />;
+  // return <Home />;
+  // return <Details />;
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen name="Details" component={Details} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 }
 
 export default App;
