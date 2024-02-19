@@ -24,9 +24,13 @@ function App(): React.JSX.Element {
         <Stack.Screen
           name="Home"
           component={Home}
-          options={{headerShown: false}}
+          options={{headerShown: false, title: 'Inicio'}}
         />
-        <Stack.Screen name="Details" component={Details} />
+        <Stack.Screen
+          name="Details"
+          component={Details}
+          options={{title: 'Detalles'}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

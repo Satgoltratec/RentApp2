@@ -41,6 +41,7 @@ function Home() {
                 height: 35,
                 marginRight: 12,
                 borderWidth: 1,
+                backgroundColor: 'white',
                 borderColor: '#e9e9e9',
                 shadowColor: '#f6f6f6',
                 shadowOffset: {width: 0, height: 2},
@@ -140,6 +141,10 @@ function Home() {
                   owner: house.owner,
                   id: house.id,
                   description: house.description,
+                  image: house.imageUrl,
+                  pricePerNight: house.pricePerNight,
+                  province: house.province,
+                  country: house.country,
                 })
               }>
               <View style={{padding: 10}}>
