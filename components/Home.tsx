@@ -137,15 +137,7 @@ function Home() {
             <Pressable
               key={house.id}
               onPress={() =>
-                navigation.navigate('Details', {
-                  owner: house.owner,
-                  id: house.id,
-                  description: house.description,
-                  image: house.imageUrl,
-                  pricePerNight: house.pricePerNight,
-                  province: house.province,
-                  country: house.country,
-                })
+                navigation.navigate('DetailsScreen', {id: house.id})
               }>
               <View style={{padding: 10}}>
                 <Image
