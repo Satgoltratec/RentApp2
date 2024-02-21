@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import {useQuery, useQueryClient} from '@tanstack/react-query';
 import {
   Alert,
   Button,
@@ -11,13 +11,14 @@ import {
   View,
   TextInput,
 } from 'react-native';
-import {data, getHouses, House} from './data';
+import {getHouses, House} from './data';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamsList} from '../App';
 
 type HomeProps = NativeStackScreenProps<RootStackParamsList, 'Home'>;
 
 function Home({navigation}: HomeProps) {
+  const query = useQuery({queryKey: ['houses'], queryFn: getHouses});
   const onPressFunction = () => {
     Alert.alert('BOTON PULSADO');
   };
@@ -34,11 +35,12 @@ function Home({navigation}: HomeProps) {
 
   // return (
   //   <View>
-  //     <Text>{JSON.stringify({casas, loading}, null, 2)}</Text>
+  //     <Text>{JSON.stringify({query}, null, 2)}</Text>
   //   </View>
   // );
 
   // const navigation = useNavigation();
+
   return (
     <SafeAreaView style={styles.container}>
       <View
@@ -155,7 +157,6 @@ function Home({navigation}: HomeProps) {
           <Button
             onPress={() => {
               getHouses().then(d => {
-                console.log(data);
                 console.log('datos recibidos');
               });
             }}
@@ -164,7 +165,7 @@ function Home({navigation}: HomeProps) {
         </View>
 
         <ScrollView style={styles.scrollViewContent}>
-          {data.map(house => (
+          {query.data?.map(house => (
             <Pressable
               key={house.id}
               onPress={() =>

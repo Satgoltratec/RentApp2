@@ -8,13 +8,18 @@
 import React from 'react';
 import Home from './components/Home';
 import {NavigationContainer} from '@react-navigation/native';
-// import {createStackNavigator} from '@react-navigation/stack';
 import {
   NativeStackScreenProps,
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
 import DetailsScreen from './components/DetailsScreen';
 // import Prueba from './components/Prueba';
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from '@tanstack/react-query';
+import {getHouses} from './components/data';
 
 export type RootStackParamsList = {
   Home: undefined;
@@ -22,6 +27,8 @@ export type RootStackParamsList = {
 };
 
 const RootStack = createNativeStackNavigator<RootStackParamsList>();
+
+const queryClient = new QueryClient();
 
 function App(): React.JSX.Element {
   // return <Prueba />;
@@ -46,20 +53,22 @@ function App(): React.JSX.Element {
     //   </Stack.Navigator>
     // </NavigationContainer>
 
-    <NavigationContainer>
-      <RootStack.Navigator initialRouteName="Home">
-        <RootStack.Screen
-          name="Home"
-          component={Home}
-          options={{headerShown: false, title: 'Inicio'}}
-        />
-        <RootStack.Screen
-          name="DetailsScreen"
-          component={DetailsScreen}
-          options={{title: 'Detalles'}}
-        />
-      </RootStack.Navigator>
-    </NavigationContainer>
+    <QueryClientProvider client={queryClient}>
+      <NavigationContainer>
+        <RootStack.Navigator initialRouteName="Home">
+          <RootStack.Screen
+            name="Home"
+            component={Home}
+            options={{headerShown: false, title: 'Inicio'}}
+          />
+          <RootStack.Screen
+            name="DetailsScreen"
+            component={DetailsScreen}
+            options={{title: 'Detalles'}}
+          />
+        </RootStack.Navigator>
+      </NavigationContainer>
+    </QueryClientProvider>
   );
 }
 

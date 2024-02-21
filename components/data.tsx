@@ -9,7 +9,7 @@ export interface House {
   description: string;
 }
 
-export const data: House[] = [
+const data: House[] = [
   {
     id: 1,
     imageUrl:

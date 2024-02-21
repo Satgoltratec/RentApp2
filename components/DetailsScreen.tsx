@@ -5,8 +5,8 @@ import {
   useNavigation,
   useRoute,
 } from '@react-navigation/native';
-
-import {data, House} from './data';
+import {useQuery} from '@tanstack/react-query';
+import {getHouses, House} from './data';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamsList} from '../App';
 
@@ -21,12 +21,15 @@ type DetailsScreenProps = NativeStackScreenProps<
 
 function DetailsScreen({navigation, route}: DetailsScreenProps) {
   // navigation.navigate('Home');
+  const {data} = useQuery({queryKey: ['houses'], queryFn: getHouses});
 
-  const house = data.find(house => house.id === route.params.id);
+  const house = data && data.find(house => house.id === route.params.id);
 
-  if (!house) {
-    return <Text>Casa no encontrada</Text>;
-  }
+  // if (!house) {
+  //   return <Text>Casa no encontrada</Text>;
+  // }
+
+  // return <Text>{JSON.stringify(data, null, 2)}</Text>;
 
   return (
     // <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
