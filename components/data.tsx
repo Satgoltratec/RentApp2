@@ -191,3 +191,21 @@ export const data: House[] = [
       'Este estudio de estilo bohemio en el corazón del distrito cultural ofrece encanto y comodidad. Con paredes de ladrillo expuesto y detalles artísticos, es un refugio inspirador para aquellos que buscan vivir cerca de la escena cultural de la ciudad.',
   },
 ];
+
+export const getHouses = (): Promise<House[]> => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(data);
+    }, 1000);
+  });
+};
+
+export const getOneHouse = (id: number): Promise<House> => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const house = data.find(h => h.id === id);
+      if (!house) reject('Casa no encontrada');
+      else resolve(house);
+    }, 1000);
+  });
+};

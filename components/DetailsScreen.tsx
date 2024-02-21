@@ -1,12 +1,32 @@
 import {Text, View, SafeAreaView, Image, ScrollView} from 'react-native';
-import {useRoute} from '@react-navigation/native';
+import {
+  NavigationProp,
+  RouteProp,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
 
 import {data, House} from './data';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {RootStackParamsList} from '../App';
 
-function DetailsScreen() {
-  const route = useRoute();
+type DetailsScreenProps = NativeStackScreenProps<
+  RootStackParamsList,
+  'DetailsScreen'
+>;
+
+// type ScreenRouteProp = RouteProp<DetailsScreenProps>
+
+// type ScreenNavigationProp = NavigationProp<DetailsScreenProps>
+
+function DetailsScreen({navigation, route}: DetailsScreenProps) {
+  // navigation.navigate('Home');
 
   const house = data.find(house => house.id === route.params.id);
+
+  if (!house) {
+    return <Text>Casa no encontrada</Text>;
+  }
 
   return (
     // <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>

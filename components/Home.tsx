@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Alert,
   Button,
@@ -11,15 +11,34 @@ import {
   View,
   TextInput,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import {data, getHouses, House} from './data';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {RootStackParamsList} from '../App';
 
-import {data, House} from './data';
+type HomeProps = NativeStackScreenProps<RootStackParamsList, 'Home'>;
 
-function Home() {
+function Home({navigation}: HomeProps) {
   const onPressFunction = () => {
     Alert.alert('BOTON PULSADO');
   };
-  const navigation = useNavigation();
+  // const [casas, setCasas] = useState<House[]>([]);
+  // const [loading, setLoading] = useState(true);
+
+  // useEffect(() => {
+  //   setLoading(true);
+  //   getHouses().then(d => {
+  //     setLoading(false);
+  //     setCasas(d);
+  //   });
+  // }, []);
+
+  // return (
+  //   <View>
+  //     <Text>{JSON.stringify({casas, loading}, null, 2)}</Text>
+  //   </View>
+  // );
+
+  // const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
       <View
@@ -130,6 +149,18 @@ function Home() {
               <Text>Diseño</Text>
             </View>
           </ScrollView>
+        </View>
+
+        <View>
+          <Button
+            onPress={() => {
+              getHouses().then(d => {
+                console.log(data);
+                console.log('datos recibidos');
+              });
+            }}
+            title="pillar casas"
+          />
         </View>
 
         <ScrollView style={styles.scrollViewContent}>
