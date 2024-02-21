@@ -25,9 +25,9 @@ function DetailsScreen({navigation, route}: DetailsScreenProps) {
 
   const house = data && data.find(house => house.id === route.params.id);
 
-  // if (!house) {
-  //   return <Text>Casa no encontrada</Text>;
-  // }
+  if (!house) {
+    return <Text>Casa no encontrada</Text>;
+  }
 
   // return <Text>{JSON.stringify(data, null, 2)}</Text>;
 
