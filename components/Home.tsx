@@ -16,6 +16,7 @@ import {getHouses, House} from './data';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamsList} from '../App';
 import {useState} from 'react';
+import {LOPDScreen} from './LOPDScreen';
 
 type HomeProps = NativeStackScreenProps<RootStackParamsList, 'Home'>;
 
@@ -46,7 +47,13 @@ function Home({navigation}: HomeProps) {
   // );
 
   // const navigation = useNavigation();
-
+  if (isLoading === true || isFetching === true) {
+    return (
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
   return (
     <SafeAreaView style={styles.container}>
       <View
@@ -210,14 +217,14 @@ function Home({navigation}: HomeProps) {
             <Text>x</Text>
             <Text>Viajes</Text>
           </View>
-          <View style={styles.itemBotton}>
-            <Text>x</Text>
-            <Text>Mensajes</Text>
-          </View>
-          <View style={styles.itemBotton}>
-            <Text>x</Text>
-            <Text>Iniciar sesión</Text>
-          </View>
+          <Pressable
+            style={styles.itemBotton}
+            onPress={() => navigation.navigate('LOPDScreen')}>
+            <View>
+              <Text>x</Text>
+              <Text>LOPD</Text>
+            </View>
+          </Pressable>
         </View>
       </View>
     </SafeAreaView>

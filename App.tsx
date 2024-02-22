@@ -5,25 +5,24 @@
  * @format
  */
 
-import React from 'react';
+import {useState} from 'react';
 import Home from './components/Home';
 import {NavigationContainer} from '@react-navigation/native';
-import {
-  NativeStackScreenProps,
-  createNativeStackNavigator,
-} from '@react-navigation/native-stack';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import DetailsScreen from './components/DetailsScreen';
 // import Prueba from './components/Prueba';
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQuery,
-} from '@tanstack/react-query';
-import {getHouses} from './components/data';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
+
+import {LOPDScreen} from './components/LOPDScreen';
+import {LoginScreen} from './components/LoginScreen';
+import {RegisterScreen} from './components/RegisterScreen';
 
 export type RootStackParamsList = {
   Home: undefined;
   DetailsScreen: {id: number};
+  LOPDScreen: undefined;
+  LoginScreen: undefined;
+  RegisterScreen: undefined;
 };
 
 const RootStack = createNativeStackNavigator<RootStackParamsList>();
@@ -37,35 +36,49 @@ function App(): React.JSX.Element {
 
   // const Stack = createNativeStackNavigator();
 
-  return (
-    // <NavigationContainer>
-    //   <Stack.Navigator initialRouteName="Home">
-    //     <Stack.Screen
-    //       name="Home"
-    //       component={Home}
-    //       options={{headerShown: false, title: 'Inicio'}}
-    //     />
-    //     <Stack.Screen
-    //       name="DetailsScreen"
-    //       component={DetailsScreen}
-    //       options={{title: 'Detalles'}}
-    //     />
-    //   </Stack.Navigator>
-    // </NavigationContainer>
+  const [signedIn, setSignedIn] = useState(true);
 
+  return (
     <QueryClientProvider client={queryClient}>
       <NavigationContainer>
         <RootStack.Navigator initialRouteName="Home">
-          <RootStack.Screen
-            name="Home"
-            component={Home}
-            options={{headerShown: false, title: 'Inicio'}}
-          />
-          <RootStack.Screen
-            name="DetailsScreen"
-            component={DetailsScreen}
-            options={{title: 'Detalles'}}
-          />
+          {signedIn ? (
+            <>
+              <RootStack.Screen
+                name="Home"
+                component={Home}
+                options={{headerShown: false, title: 'Inicio'}}
+              />
+              <RootStack.Screen
+                name="DetailsScreen"
+                component={DetailsScreen}
+                options={{title: 'Detalles'}}
+              />
+              <RootStack.Screen
+                name="LOPDScreen"
+                component={LOPDScreen}
+                options={{title: 'Politica Protección de Datos'}}
+              />
+            </>
+          ) : (
+            <>
+              <RootStack.Screen
+                name="LoginScreen"
+                component={LoginScreen}
+                options={{title: 'Login'}}
+              />
+              <RootStack.Screen
+                name="LOPDScreen"
+                component={LOPDScreen}
+                options={{title: 'Politica Protección de Datos'}}
+              />
+              <RootStack.Screen
+                name="RegisterScreen"
+                component={RegisterScreen}
+                options={{title: 'Registro'}}
+              />
+            </>
+          )}
         </RootStack.Navigator>
       </NavigationContainer>
     </QueryClientProvider>
