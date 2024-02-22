@@ -1,12 +1,14 @@
-import {Text, View, SafeAreaView, Image, ScrollView} from 'react-native';
 import {
-  NavigationProp,
-  RouteProp,
-  useNavigation,
-  useRoute,
-} from '@react-navigation/native';
+  Text,
+  View,
+  SafeAreaView,
+  Image,
+  ScrollView,
+  ActivityIndicator,
+} from 'react-native';
+
 import {useQuery} from '@tanstack/react-query';
-import {getHouses, House} from './data';
+import {getOneHouse, House} from './data';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamsList} from '../App';
 
@@ -21,18 +23,28 @@ type DetailsScreenProps = NativeStackScreenProps<
 
 function DetailsScreen({navigation, route}: DetailsScreenProps) {
   // navigation.navigate('Home');
-  const {data} = useQuery({queryKey: ['houses'], queryFn: getHouses});
+  const {data, isLoading, isLoadingError, isFetching} = useQuery({
+    queryKey: ['house'],
+    queryFn: () => getOneHouse(route.params.id),
+  });
 
-  const house = data && data.find(house => house.id === route.params.id);
+  // const house = data && data.find(house => house.id === route.params.id);
 
-  if (!house) {
-    return <Text>Casa no encontrada</Text>;
+  const house = data;
+
+  if (!house || isLoading === true || isFetching === true) {
+    return (
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
   }
-
-  // return <Text>{JSON.stringify(data, null, 2)}</Text>;
-
   return (
+    // <View>
+    //   <Text>{JSON.stringify(data, null, 2)}</Text>
+    // </View>
     // <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+
     <SafeAreaView style={{flex: 1}}>
       <Image
         source={{uri: house.imageUrl}}
@@ -61,8 +73,6 @@ function DetailsScreen({navigation, route}: DetailsScreenProps) {
           <Text>{house.description}</Text>
         </View>
       </ScrollView>
-      {/* <Text>Pantalla de detalles</Text>
-      <Text>{JSON.stringify(house, null, 2)}</Text> */}
     </SafeAreaView>
   );
 }

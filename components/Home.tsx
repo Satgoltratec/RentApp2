@@ -1,4 +1,4 @@
-import {useQuery, useQueryClient} from '@tanstack/react-query';
+import {useQuery} from '@tanstack/react-query';
 import {
   Alert,
   Button,
@@ -10,15 +10,21 @@ import {
   Text,
   View,
   TextInput,
+  ActivityIndicator,
 } from 'react-native';
 import {getHouses, House} from './data';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamsList} from '../App';
+import {useState} from 'react';
 
 type HomeProps = NativeStackScreenProps<RootStackParamsList, 'Home'>;
 
 function Home({navigation}: HomeProps) {
-  const query = useQuery({queryKey: ['houses'], queryFn: getHouses});
+  const {data, isLoading, isLoadingError, isFetching} = useQuery({
+    queryKey: ['houses'],
+    queryFn: getHouses,
+  });
+
   const onPressFunction = () => {
     Alert.alert('BOTON PULSADO');
   };
@@ -35,7 +41,7 @@ function Home({navigation}: HomeProps) {
 
   // return (
   //   <View>
-  //     <Text>{JSON.stringify({query}, null, 2)}</Text>
+  //     <Text>{JSON.stringify({data}, null, 2)}</Text>
   //   </View>
   // );
 
@@ -153,19 +159,12 @@ function Home({navigation}: HomeProps) {
           </ScrollView>
         </View>
 
-        <View>
-          <Button
-            onPress={() => {
-              getHouses().then(d => {
-                console.log('datos recibidos');
-              });
-            }}
-            title="pillar casas"
-          />
-        </View>
+        {/* <View>
+          <Button onPress={() => refetch()} title="Obtener casas" />
+        </View> */}
 
         <ScrollView style={styles.scrollViewContent}>
-          {query.data?.map(house => (
+          {data?.map(house => (
             <Pressable
               key={house.id}
               onPress={() =>
