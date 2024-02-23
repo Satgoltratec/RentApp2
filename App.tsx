@@ -25,6 +25,12 @@ export type RootStackParamsList = {
   RegisterScreen: undefined;
 };
 
+// function suma<T, Z>(a: T, a: Z): T {
+//   return a;
+// }
+
+// let res = suma(23, "77")
+
 const RootStack = createNativeStackNavigator<RootStackParamsList>();
 
 const queryClient = new QueryClient();
@@ -36,7 +42,7 @@ function App(): React.JSX.Element {
 
   // const Stack = createNativeStackNavigator();
 
-  const [signedIn, setSignedIn] = useState(true);
+  const [signedIn, setSignedIn] = useState<boolean>(true);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -54,11 +60,6 @@ function App(): React.JSX.Element {
                 component={DetailsScreen}
                 options={{title: 'Detalles'}}
               />
-              <RootStack.Screen
-                name="LOPDScreen"
-                component={LOPDScreen}
-                options={{title: 'Politica Protección de Datos'}}
-              />
             </>
           ) : (
             <>
@@ -67,11 +68,7 @@ function App(): React.JSX.Element {
                 component={LoginScreen}
                 options={{title: 'Login'}}
               />
-              <RootStack.Screen
-                name="LOPDScreen"
-                component={LOPDScreen}
-                options={{title: 'Politica Protección de Datos'}}
-              />
+
               <RootStack.Screen
                 name="RegisterScreen"
                 component={RegisterScreen}
@@ -79,6 +76,13 @@ function App(): React.JSX.Element {
               />
             </>
           )}
+          <RootStack.Group screenOptions={{presentation: 'modal'}}>
+            <RootStack.Screen
+              name="LOPDScreen"
+              component={LOPDScreen}
+              options={{title: 'Politica Protección de Datos'}}
+            />
+          </RootStack.Group>
         </RootStack.Navigator>
       </NavigationContainer>
     </QueryClientProvider>

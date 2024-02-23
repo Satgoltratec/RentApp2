@@ -1,7 +1,11 @@
-import {Text, View} from 'react-native';
+import {Button, Text, View} from 'react-native';
 import {useRoute} from '@react-navigation/native';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {RootStackParamsList} from '../App';
 
-export function LOPDScreen() {
+type LPODProps = NativeStackScreenProps<RootStackParamsList, 'LOPDScreen'>;
+
+export function LOPDScreen({navigation}: LPODProps) {
   return (
     <View style={{flex: 1, justifyContent: 'center'}}>
       <Text>
@@ -11,6 +15,7 @@ export function LOPDScreen() {
         procedimientos que guían la recopilación, el almacenamiento, el
         procesamiento y el intercambio de datos en nuestra empresa.
       </Text>
+      <Button onPress={() => navigation.goBack()} title="Atras" />
     </View>
   );
 }
